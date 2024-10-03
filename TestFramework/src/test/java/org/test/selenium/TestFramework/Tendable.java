@@ -18,7 +18,6 @@ import org.testng.asserts.SoftAssert;
 public class Tendable extends TestBase{
 	
 	public SoftAssert softAssert; 
-//	public Actions act = new Actions(driver);
 	
 	public void beforeClass() {
 		softAssert = new SoftAssert();
@@ -29,23 +28,23 @@ public class Tendable extends TestBase{
 		init();	
 	}
 	
-//	@Test
-//	public void homePageTests(){	
-//		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
-//		WebElement OurSolution = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Solution \"]"));
-//		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
-//		
-//		softAssert.assertEquals(OurStory.isDisplayed(), true);
-//		softAssert.assertEquals(OurSolution.isDisplayed(), true);
-//		softAssert.assertEquals(WhyTendable.isDisplayed(), true);		
-//		softAssert.assertAll();
-//	}
-	
-//	@Test	
-//	public void verifyRequestDemoButton() {
-//		WebElement RequestDemoButton = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));		
-//		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
+	@Test
+	public void homePageTests(){	
+		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
+		WebElement OurSolution = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Solution \"]"));
+		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
 		
+		softAssert.assertEquals(OurStory.isDisplayed(), true);
+		softAssert.assertEquals(OurSolution.isDisplayed(), true);
+		softAssert.assertEquals(WhyTendable.isDisplayed(), true);		
+		softAssert.assertAll();
+	}
+	
+	@Test	
+	public void verifyRequestDemoButton() {
+		WebElement RequestDemoButton = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));		
+		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
+//		
 //		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
 //		OurStory.click();
 //		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
@@ -53,8 +52,8 @@ public class Tendable extends TestBase{
 //		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
 //		WhyTendable.click();
 //		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
-//	}
-//	
+	}
+	
 	@Test
 	public void verifyContactUsPage() throws InterruptedException {
 		
@@ -98,8 +97,5 @@ public class Tendable extends TestBase{
 	@AfterTest	
 	public void afterTest() {
 		tearDown();
-	}
-	
-	
-
+	}	
 }

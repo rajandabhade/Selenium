@@ -36,4 +36,25 @@
 			<version>2.12.4</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+	<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.0.0-M5</version>
+    <configuration>
+        <suiteXmlFiles>
+            <suiteXmlFile>C:\Users\Rajan\eclipse-workspace\TestFramework\testng.xml</suiteXmlFile>
+        </suiteXmlFiles>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-testng</artifactId>
+            <version>3.0.0-M5</version>
+        </dependency>
+    </dependencies>
+</plugin>
+</plugins>
+</build>
 </project>
