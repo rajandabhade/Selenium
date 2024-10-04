@@ -10,6 +10,6 @@
 2. Right click on pom.xml file and Runs As Maven test
 
 # To execute project on command promp
-1. git clone https://github.com/naveenanimation20/PageObjectModel
+1. git clone https://github.com/rajandabhade/Selenium.git
 2. cd TestFramework
 3. mvn clean test
