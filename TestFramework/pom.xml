@@ -44,7 +44,7 @@
     <version>3.0.0-M5</version>
     <configuration>
         <suiteXmlFiles>
-            <suiteXmlFile>C:\Users\Rajan\eclipse-workspace\TestFramework\testng.xml</suiteXmlFile>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
         </suiteXmlFiles>
     </configuration>
     <dependencies>

@@ -17,10 +17,12 @@ import org.testng.asserts.SoftAssert;
 
 public class Tendable extends TestBase{
 	
-	public SoftAssert softAssert; 
+	public SoftAssert softAssert; 	
 	
+	@BeforeMethod
 	public void beforeClass() {
 		softAssert = new SoftAssert();
+		
 	}
 	
 	@BeforeTest	
@@ -41,17 +43,29 @@ public class Tendable extends TestBase{
 	}
 	
 	@Test	
-	public void verifyRequestDemoButton() {
-		WebElement RequestDemoButton = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));		
+	public void verifyRequestDemoButton() throws InterruptedException {
+		WebElement RequestDemoButton = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
 		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
-//		
-//		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
-//		OurStory.click();
-//		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
-//		
-//		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
-//		WhyTendable.click();
-//		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
+
+		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
+		Thread.sleep(3000);
+		OurStory.click();
+		WebElement RequestDemoButton1 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
+		softAssert.assertEquals(RequestDemoButton1.isDisplayed(), true);
+		
+		WebElement OurSolution = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Solution \"]"));
+		Thread.sleep(3000);
+		OurSolution.click();
+		WebElement RequestDemoButton2 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
+		softAssert.assertEquals(RequestDemoButton2.isDisplayed(), true);
+		
+		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
+		Thread.sleep(3000);
+		WhyTendable.click();
+		WebElement RequestDemoButton3 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
+		softAssert.assertEquals(RequestDemoButton3.isDisplayed(), true);
+		
+		softAssert.assertAll();
 	}
 	
 	@Test
