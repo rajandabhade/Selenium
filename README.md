@@ -11,5 +11,5 @@
 
 # To execute project on command promp
 1. git clone https://github.com/rajandabhade/Selenium.git
-2. cd TestFramework
+2. cd Selenium/TestFramework
 3. mvn clean test
