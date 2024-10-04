@@ -1,15 +1,10 @@
 package org.test.selenium.TestFramework;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.test.selenium.TestFramework.Pages.ContactUsPage;
+import org.test.selenium.TestFramework.Pages.HomePage;
+import org.test.selenium.TestFramework.Utils.TestUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -17,12 +12,17 @@ import org.testng.asserts.SoftAssert;
 
 public class Tendable extends TestBase{
 	
-	public SoftAssert softAssert; 	
+	public SoftAssert softAssert;
+	HomePage homePageObjects;
+	ContactUsPage contactUsPage;
+	TestUtils testUtils;
 	
 	@BeforeMethod
 	public void beforeClass() {
 		softAssert = new SoftAssert();
-		
+		homePageObjects = new HomePage();
+		contactUsPage = new ContactUsPage();
+		testUtils = new TestUtils();
 	}
 	
 	@BeforeTest	
@@ -31,81 +31,44 @@ public class Tendable extends TestBase{
 	}
 	
 	@Test
-	public void homePageTests(){	
-		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
-		WebElement OurSolution = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Solution \"]"));
-		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
-		
-		softAssert.assertEquals(OurStory.isDisplayed(), true);
-		softAssert.assertEquals(OurSolution.isDisplayed(), true);
-		softAssert.assertEquals(WhyTendable.isDisplayed(), true);		
+	public void verifyHomePageMenuIcons() {	
+		softAssert.assertEquals(homePageObjects.OurStory.isDisplayed(), true);
+		softAssert.assertEquals(homePageObjects.OurSolution.isDisplayed(), true);
+		softAssert.assertEquals(homePageObjects.WhyTendable.isDisplayed(), true);		
 		softAssert.assertAll();
 	}
 	
 	@Test	
 	public void verifyRequestDemoButton() throws InterruptedException {
-		WebElement RequestDemoButton = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
-		softAssert.assertEquals(RequestDemoButton.isDisplayed(), true);
+		softAssert.assertEquals(homePageObjects.RequestDemoButton.isDisplayed(), true);
 
-		WebElement OurStory = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Story \"]"));
-		Thread.sleep(3000);
-		OurStory.click();
-		WebElement RequestDemoButton1 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
-		softAssert.assertEquals(RequestDemoButton1.isDisplayed(), true);
+		testUtils.clickOnElement(driver,homePageObjects.OurStory);
+		softAssert.assertEquals(homePageObjects.RequestDemoButton.isDisplayed(), true);
 		
-		WebElement OurSolution = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Our Solution \"]"));
-		Thread.sleep(3000);
-		OurSolution.click();
-		WebElement RequestDemoButton2 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
-		softAssert.assertEquals(RequestDemoButton2.isDisplayed(), true);
+		testUtils.clickOnElement(driver,homePageObjects.OurSolution);
+		softAssert.assertEquals(homePageObjects.RequestDemoButton.isDisplayed(), true);
 		
-		WebElement WhyTendable = driver.findElement(By.xpath("//nav[@id=\"main-navigation-new\"]//li/a[text()=\"Why Tendable? \"]"));
-		Thread.sleep(3000);
-		WhyTendable.click();
-		WebElement RequestDemoButton3 = driver.findElement(By.xpath("//a[text()=\"Request A Demo\"]"));	
-		softAssert.assertEquals(RequestDemoButton3.isDisplayed(), true);
+		testUtils.clickOnElement(driver,homePageObjects.WhyTendable);
+		softAssert.assertEquals(homePageObjects.RequestDemoButton.isDisplayed(), true);
 		
 		softAssert.assertAll();
 	}
 	
 	@Test
-	public void verifyContactUsPage() throws InterruptedException {
+	public void verifyContactUsPage() throws InterruptedException {		
+		testUtils.clickOnElement(driver, contactUsPage.ContactUsButton);
 		
-		JavascriptExecutor jsExec = (JavascriptExecutor) driver;
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+		testUtils.clickOnElement(driver,contactUsPage.MarketingContactButton);
 		
-		WebElement ContactUsButton = driver.findElement(By.xpath("//a[text()='Contact Us']"));
-		ContactUsButton.click();
+		contactUsPage.fullNameTextBox.sendKeys("Rajan");
+		contactUsPage.organizationNameTextbox.sendKeys("testOrg");
+		contactUsPage.phoneNumberTextbox.sendKeys("463736");
+		contactUsPage.emailTextbox.sendKeys("test@abc.com");
 		
-		WebElement MarketingContactButton = driver.findElement(By.xpath("//div[contains(text(),'Marketing')]/parent::div//button[text()='Contact']"));		
-		jsExec.executeScript("window.scrollBy(0,300)");
-		wait.until(ExpectedConditions.elementToBeClickable(MarketingContactButton));
-		Thread.sleep(3000);
-		MarketingContactButton.click();
+		testUtils.clickOnElement(driver,contactUsPage.IagrreCheckbox);
+		testUtils.clickOnElement(driver,contactUsPage.SubmitButton);
 		
-		WebElement fullNameTextBox = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//input[@name='fullName']"));
-		WebElement organizationNameTextbox = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//input[@name='organisationName']"));
-		WebElement 	phoneNumberTextbox = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//input[@name='cellPhone']"));
-		WebElement emailTextbox = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//input[@name='email']"));
-		WebElement IagrreCheckbox = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//input[@name='consentAgreed']"));
-		WebElement SubmitButton = driver.findElement(By.xpath("//form[@id='contactMarketingPipedrive-163701']//button[@name='form_page_submit']"));
-		
-		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOf(fullNameTextBox));
-		fullNameTextBox.sendKeys("Rajan");
-		organizationNameTextbox.sendKeys("testOrg");
-		phoneNumberTextbox.sendKeys("463736");
-		emailTextbox.sendKeys("test@abc.com");		
-		
-		jsExec.executeScript("window.scrollBy(0,250)");
-		Thread.sleep(3000);
-		
-		wait.until(ExpectedConditions.visibilityOf(IagrreCheckbox));
-		IagrreCheckbox.click();
-		SubmitButton.click();
-		
-		WebElement ErrorMessage = driver.findElement(By.xpath("//p[text()='Sorry, there was an error submitting the form. Please try again.']"));
-		Assert.assertEquals(ErrorMessage.isDisplayed(), true);
+		Assert.assertEquals(contactUsPage.ErrorMessage.isDisplayed(), true);
 	}
 	
 	@AfterTest	

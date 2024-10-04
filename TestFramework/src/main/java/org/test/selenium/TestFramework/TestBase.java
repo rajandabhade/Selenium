@@ -1,5 +1,4 @@
 package org.test.selenium.TestFramework;
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -14,6 +13,7 @@ public class TestBase {
 		driver = new ChromeDriver(); 
 		driver.get("https://www.tendable.com/");
 		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		}
 	
